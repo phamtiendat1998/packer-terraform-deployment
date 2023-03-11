@@ -17,6 +17,13 @@ For this project, you will write a Packer template and a Terraform template to d
 4. Install [Terraform](https://www.terraform.io/downloads.html)
 
 ### Instructions
+You can customize the deployments using the variables in variables.tf file: 
+ - "prefix": The prefix of resouce name
+ - "location": Azure region
+ - "commonTagName": Tag name in order to attached to resouces
+ - "virtualMachineCount": The number of virtual machines will be deployed
+
+After input the variables:
 1. Run packer in command line: <code>packer build "server.json"</code>.
 2. Run terraform in command line: <code>teraform init</code>.
 3. Run terraform in command line: <code>teraform plan -out solution.plan</code>.

@@ -4,26 +4,30 @@
 		"client_secret": "TNr8Q~8brnbS4ifygD7P.I2oQwONELeMmbCrQdlR",
 		"subscription_id": "e85c2d28-e9aa-4775-85de-521be630b9fa"
 	},
-	"builders": [{
-		"type": "azure-arm",
-		"client_id": "{{user `client_id`}}",
-		"client_secret": "{{user `client_secret`}}",
-		"subscription_id": "{{user `subscription_id`}}",
-		"os_type": "Linux",
-		"image_publisher": "Canonical",
-		"image_offer": "UbuntuServer",
-		"image_sku": "18.04-LTS",
-		"managed_image_name": "ubuntuImage",
-		"managed_image_resource_group_name": "Azuredevops",
-		"location": "East US",
-		"vm_size": "Standard_D2s_v3"
-	}],
-	"provisioners": [{
-		"inline": [
-			"echo 'Hello, World!' > index.html",
-			"nohup busybox httpd -f -p 80 &"
-		],
-		"inline_shebang": "/bin/sh -x",
-		"type": "shell"
-	}]
+	"builders": [
+		{
+			"type": "azure-arm",
+			"client_id": "{{user `client_id`}}",
+			"client_secret": "{{user `client_secret`}}",
+			"subscription_id": "{{user `subscription_id`}}",
+			"os_type": "Linux",
+			"image_publisher": "Canonical",
+			"image_offer": "UbuntuServer",
+			"image_sku": "18.04-LTS",
+			"managed_image_name": "ubuntuImage",
+			"managed_image_resource_group_name": "Azuredevops",
+			"location": "East US",
+			"vm_size": "Standard_D2s_v3"
+		}
+	],
+	"provisioners": [
+		{
+			"type": "shell",
+			"inline": [
+				"echo 'Hello, World!' > index.html",
+				"nohup busybox httpd -f -p 80 &"
+			],
+			"inline_shebang": "/bin/sh -x"
+		}
+	]
 }

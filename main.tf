@@ -34,33 +34,65 @@ resource "azurerm_network_security_group" "main" {
   location            = data.azurerm_resource_group.main.location
   resource_group_name = data.azurerm_resource_group.main.name
 
-  security_rule {
-    name                       = "AllowInternalAccess"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_address_prefix      = "VirtualNetwork"
-    destination_address_prefix = "VirtualNetwork"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-  }
-
-  security_rule {
-    name                       = "DenyInternetAccess"
-    priority                   = 200
-    direction                  = "Inbound"
-    access                     = "Deny"
-    protocol                   = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "VirtualNetwork"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-  }
-
   tags = {
     udacity = var.commonTagName
   }
+}
+
+# Rule to deny all inbound traffic from the internet
+resource "azurerm_network_security_rule" "deny_internet_inbound" {
+  name                        = "deny-internet-inbound"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Deny"
+  protocol                    = "*"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "Internet"
+  destination_address_prefix  = "*"
+  network_security_group_name = azurerm_network_security_group.main.name
+}
+
+# Rule allowing inbound traffic inside the same Virtual Network
+resource "azurerm_network_security_rule" "allow_vnet_inbound" {
+  name                        = "allow-vnet-inbound"
+  priority                    = 200
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "*"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "VirtualNetwork"
+  destination_address_prefix  = "VirtualNetwork"
+  network_security_group_name = azurerm_network_security_group.main.name
+}
+
+# Rule allowing outbound traffic inside the same Virtual Network
+resource "azurerm_network_security_rule" "allow_vnet_outbound" {
+  name                        = "allow-vnet-outbound"
+  priority                    = 300
+  direction                   = "Outbound"
+  access                      = "Allow"
+  protocol                    = "*"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "VirtualNetwork"
+  destination_address_prefix  = "VirtualNetwork"
+  network_security_group_name = azurerm_network_security_group.main.name
+}
+
+# Rule allowing HTTP traffic to the VMs from the load balancer
+resource "azurerm_network_security_rule" "allow_http_from_lb" {
+  name                        = "allow-http-from-lb"
+  priority                    = 400
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "80"
+  source_address_prefix       = azurerm_lb.main.frontend_ip_configuration
+  destination_address_prefix  = "*"
+  network_security_group_name = azurerm_network_security_group.main.name
 }
 
 resource "azurerm_network_interface" "main" {
