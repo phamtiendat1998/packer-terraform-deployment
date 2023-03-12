@@ -1,8 +1,8 @@
 {
 	"variables": {
-		"client_id": "10606402-99dc-4dbe-83e1-0aa520a586ff",
-		"client_secret": "TNr8Q~8brnbS4ifygD7P.I2oQwONELeMmbCrQdlR",
-		"subscription_id": "e85c2d28-e9aa-4775-85de-521be630b9fa"
+		"client_id": "b74bce56-3a77-48f0-9aa1-c14b850b898f",
+		"client_secret": "FkX8Q~QQsaER.W3kBRT~0WWA8oxwLx7iWH2r5bIg",
+		"subscription_id": "46f0b4f7-e5d8-488c-b438-00f74a74c84a"
 	},
 	"builders": [
 		{

@@ -14,11 +14,11 @@ variable "commonTagName" {
 }
 
 variable "virtualMachineCount" {
-  description = "The number of virtual machines will be deploy."
+  description = "The number of virtual machines will be deployed."
   default = 2
 
   validation {
-    condition     = var.virtualMachineCount > 1 && var.virtualMachineCount > 6
+    condition     = var.virtualMachineCount > 1 && var.virtualMachineCount < 6
     error_message = "The virtualMachineCount value for the count parameter should be at least 2, and for cost reasons, no more than 5."
   }
 }

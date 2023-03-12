@@ -50,6 +50,7 @@ resource "azurerm_network_security_rule" "deny_internet_inbound" {
   destination_port_range      = "*"
   source_address_prefix       = "Internet"
   destination_address_prefix  = "*"
+  resource_group_name         = data.azurerm_resource_group.main.name
   network_security_group_name = azurerm_network_security_group.main.name
 }
 
@@ -64,6 +65,7 @@ resource "azurerm_network_security_rule" "allow_vnet_inbound" {
   destination_port_range      = "*"
   source_address_prefix       = "VirtualNetwork"
   destination_address_prefix  = "VirtualNetwork"
+  resource_group_name         = data.azurerm_resource_group.main.name
   network_security_group_name = azurerm_network_security_group.main.name
 }
 
@@ -78,6 +80,7 @@ resource "azurerm_network_security_rule" "allow_vnet_outbound" {
   destination_port_range      = "*"
   source_address_prefix       = "VirtualNetwork"
   destination_address_prefix  = "VirtualNetwork"
+  resource_group_name         = data.azurerm_resource_group.main.name
   network_security_group_name = azurerm_network_security_group.main.name
 }
 
@@ -90,8 +93,9 @@ resource "azurerm_network_security_rule" "allow_http_from_lb" {
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "80"
-  source_address_prefix       = azurerm_lb.main.frontend_ip_configuration
+  source_address_prefix       = azurerm_lb.main.frontend_ip_configuration[0].id
   destination_address_prefix  = "*"
+  resource_group_name         = data.azurerm_resource_group.main.name
   network_security_group_name = azurerm_network_security_group.main.name
 }
 

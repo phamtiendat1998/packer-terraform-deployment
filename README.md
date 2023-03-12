@@ -17,7 +17,7 @@ For this project, you will write a Packer template and a Terraform template to d
 4. Install [Terraform](https://www.terraform.io/downloads.html)
 
 ### Instructions
-You can customize the deployments using the variables in variables.tf file: 
+You can customize the deployment using the variables in variables.tf file: 
  - "prefix": The prefix of resouce name
  - "location": Azure region
  - "commonTagName": Tag name in order to attached to resouces
