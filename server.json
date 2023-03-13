@@ -1,8 +1,8 @@
 {
 	"variables": {
-		"client_id": "b74bce56-3a77-48f0-9aa1-c14b850b898f",
-		"client_secret": "FkX8Q~QQsaER.W3kBRT~0WWA8oxwLx7iWH2r5bIg",
-		"subscription_id": "46f0b4f7-e5d8-488c-b438-00f74a74c84a"
+		"client_id": "0b5e7d86-ae13-42e1-b23a-7c24af47820e",
+		"client_secret": "e768Q~v6A_d6JeJ_NiW9pxTtjSiUKcXDgHcbmbo9",
+		"subscription_id": "e85c2d28-e9aa-4775-85de-521be630b9fa"
 	},
 	"builders": [
 		{
@@ -16,8 +16,14 @@
 			"image_sku": "18.04-LTS",
 			"managed_image_name": "ubuntuImage",
 			"managed_image_resource_group_name": "Azuredevops",
-			"location": "East US",
-			"vm_size": "Standard_D2s_v3"
+			"location": "South Central US",
+			"vm_size": "Standard_D2s_v3",
+			"azure_tag": [
+				{
+					"name": "udacity",
+					"value": "udacity course 1"
+				}
+			]
 		}
 	],
 	"provisioners": [
